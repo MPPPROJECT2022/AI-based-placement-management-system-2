@@ -12,7 +12,6 @@ import numpy as np
 import argparse
 import cv2
 from pyresparser import ResumeParser
-import os
 from docx import Document
 
 
@@ -436,14 +435,10 @@ def objectDetection(prototxt,model,image,confidence):
     return objectsObjects
     # return jsonify(list(data))
 
-tArray = objectDetection('MobileNetSSD_deploy.prototxt.txt','MobileNetSSD_deploy.caffemodel','images/mobile.jpeg',0.2)
-print(str(tArray))
+# tArray = objectDetection('MobileNetSSD_deploy.prototxt.txt','MobileNetSSD_deploy.caffemodel','images/mobile.jpeg',0.2)
+# print(str(tArray))
 
 
 def getProctoringImages(userCode,userInput,userOutput,imageArray,testUUID):
     print("userArray"+imageArray)
     ## write a function to proess images from frontend
-
-# def resumeParsing():
-    
-
