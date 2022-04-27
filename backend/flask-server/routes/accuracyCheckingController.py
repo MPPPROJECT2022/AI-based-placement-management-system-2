@@ -11,14 +11,17 @@ import nltk
 import numpy as np
 import argparse
 import cv2
+from pyresparser import ResumeParser
+import os
+from docx import Document
 
 
 client = MongoClient(
     "mongodb+srv://mpp:mpp@cluster0.ybb0e.mongodb.net/mppproject?retryWrites=true&w=majority")
 
 db = client.get_database("mppproject")
-# from objective import ObjectiveTest
-# from subjective import SubjectiveTest
+from objective import ObjectiveTest
+from subjective import SubjectiveTest
 
 alphabets = "([A-Za-z])"
 prefixes = "(Mr|St|Mrs|Ms|Dr)[.]"
@@ -439,3 +442,8 @@ print(str(tArray))
 
 def getProctoringImages(userCode,userInput,userOutput,imageArray,testUUID):
     print("userArray"+imageArray)
+    ## write a function to proess images from frontend
+
+# def resumeParsing():
+    
+
