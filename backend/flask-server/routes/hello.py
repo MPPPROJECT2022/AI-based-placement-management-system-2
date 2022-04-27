@@ -106,5 +106,12 @@ def getSentencesToSpeak():
     response = ac.getSentencesToSpeak(request.json["topic"],request.json["testUUID"]);
     return response;
 
+@app.route('/proctoring/saveImages', methods = ['POST'])
+@exponential_backoff()
+def getProctoringImages():
+        response = ac.getProctoringImages(request.json["userCode"],request.json["userInput"],request.json["userOutput"],request.json["imageArray"],request.json["testUUID"]);
+        return response;
+
+
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=5000)
