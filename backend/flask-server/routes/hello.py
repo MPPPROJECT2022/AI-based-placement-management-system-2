@@ -112,6 +112,16 @@ def getProctoringImages():
         response = ac.getProctoringImages(request.json["userCode"],request.json["userInput"],request.json["userOutput"],request.json["imageArray"],request.json["testUUID"]);
         return response;
 
+@app.route('/resume/parsing', methods = ['POST'])
+@exponential_backoff()
+def resumeParsing():
+        response = ac.resumeParsing(request.json["emailId"],);
+        return response;
+
+
+
+
+
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=5000)
