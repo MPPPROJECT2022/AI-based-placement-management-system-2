@@ -16,10 +16,10 @@
   --box-shadow: #f3f1f1;
 }
 
-html {
+/* html {
   font-size: 2vw;
   overflow-x: hidden
-}
+} */
 
 .primary {
   color: var(--primary);
@@ -50,14 +50,6 @@ html {
   cursor: pointer;
 }
 
-/* h1, h2, h3, h4, h5 {
-  font-family: 'Viga', sans-serif;
-}
-
-p, span, a {
-  font-family: 'Oxygen', sans-serif;
-} */
-
 body {
   margin: 0;
   padding: 0;
@@ -87,7 +79,7 @@ body {
   user-select:  none !important;
   pointer-events: none !important;
 }
-/* media queries */
+
 
 @media(min-width:768px) {
   .dashboard {

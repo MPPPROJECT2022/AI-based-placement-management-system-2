@@ -12,13 +12,12 @@ import codeChallangeResult from '../pages/codeChallangeResult'
 const Routes = () => {
     return (
         <Switch>
-            <Route path='/dashboard' exact component={Dashboard}/>
+            <Route path='/admindashboard' exact component={Dashboard}/>
             <Route path='/customers' exact component={Customers}/>
             <Route path='/aptitude' exact component={Aptitude}/>
             <Route path='/technical' exact component={TechnicalResult}/>
             <Route path='/gd' exact component={GDResult}/>
-            <Route path='/codechallange' exact component={codeChallangeResult}/>
-           
+            <Route path='/codechallange' exact component={codeChallangeResult}/> 
         </Switch>
     )
 }

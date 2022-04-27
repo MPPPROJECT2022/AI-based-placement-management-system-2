@@ -33,7 +33,7 @@ const LeftMenu = (props) => {
   const handleProfile = () => {};
 
   const { md } = useBreakpoint();
-  const homeRoute = isAuthenticated ? "/" : "signin";
+  const homeRoute = isAuthenticated ? "/aptitude" : "signin";
   const testRoute = isAuthenticated ? "/attempt-test" : "signup";
   const resultRoute = isAuthenticated ? "/result" : "";
   const signOutRoute = isAuthenticated ? "/signin" : "";

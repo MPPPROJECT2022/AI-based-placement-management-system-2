@@ -21,7 +21,7 @@ function Login(props) {
 
   useEffect(() => {
     if (props.isAuthenticated) {
-      history.push("/");
+      history.push("/aptitude");
     }
   }, [props]);
 

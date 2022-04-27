@@ -62,7 +62,7 @@ function App(props) {
           <Route exact={true} path="/signup" component={Signup} />
           <ProtectedRoute
             exact={true}
-            path="/"
+            path="/aptitude"
             component={
               Roles.teacher === role ? TeacherDashboard : StudentDashboard
             }

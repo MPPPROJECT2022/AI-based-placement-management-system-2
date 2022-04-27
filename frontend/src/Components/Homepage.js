@@ -5,13 +5,14 @@ import codeCompiler from '../codeCompiler'
 // import Navbar from './MainNavbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Quize from './Quize'
+import Aptitude from '../AptiComponents/index'
 import Module3 from './Module3'
 import Module4 from './module4'
 import MainHomePage from './MainHomePage'
 import Admin from './Admin'
 import Result from '../Components/Result/Result'
 import CodeAdmin from '../Components/Admin/CodeAdmin'
-
+import index from '../AdminDashboard/index'
 function Homepage() {
 return (
 	<Router>
@@ -19,7 +20,8 @@ return (
 	<Switch>
 		<Route path='/' exact component={MainHomePage} />
 		<Route path='/codepractice' exact component={codeCompiler} />
-		<Route path='/aptitude' component={Quize} />
+		<Route path='/adminDashboard' exact component={index} />
+		<Route path='/aptitude' component={Aptitude} />
 		<Route path='/Module3' component={Module3} />
 		<Route path='/Module4' component={Module4} />
 		<Route path='/Admin' component={Admin} />

@@ -11,9 +11,9 @@ class Selfie extends Component {
     canvasEle = React.createRef();
     imageEle = React.createRef();
 
-    // componentDidMount = async () => {
-    //     this.startCamera();
-    // }
+    componentDidMount = async () => {
+        this.startCamera();
+    }
 
     startCamera = async () => {
         try {
@@ -77,7 +77,7 @@ class Selfie extends Component {
             {this.state.imageURL === '' && <div className="cam">
                 <video width="100%" height="100%" className="video-player" autoPlay={true} ref={this.videoEle}></video>
                 <button className="btn capture-btn" onClick={this.takeSelfie}>
-                    <i class="fa fa-camera" aria-hidden="true"></i>
+                    <i className="fa fa-camera" aria-hidden="true"></i>
                 </button>
             </div>
             }
@@ -87,13 +87,15 @@ class Selfie extends Component {
             {this.state.imageURL !== '' && <div className="preview">
                 <img className="preview-img" src={this.state.imageURL} ref={this.imageEle} />
 
-                <div className="btn-container">
-                    <button className="btn back-btn" onClick={this.backToCam}>
+                <div>
+                    <button onClick={this.backToCam}>
                         <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        backtoCam
                     </button>
                     <a href={this.state.imageURL} download="selfie.png"
-                     className="btn download-btn">
-                        <i class="fa fa-download" aria-hidden="true"></i>
+                     >
+                        <i className="fa fa-download" aria-hidden="true"></i>
+                        download
                     </a>
                 </div>
 

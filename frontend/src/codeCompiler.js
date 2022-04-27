@@ -6,12 +6,14 @@ import MainNavbar from './Components/MainNavbar'
 import Axios from 'axios';
 import spinner from './spinner.svg';
 import { v4 as uuid } from 'uuid';
-import "bootstrap/dist/css/bootstrap.min.css";
+import Selfie from './Components/selfie'
+import ls from 'local-storage'
 function App() {
 const codeQuestions = ["fighting", "learning", "qwerty"]
 
 const [testUUID, settestUUID] = useState('');
 const [imageArray, setimageArray] = useState([])
+const [myImage, setmyImage] = useState('')
 const newArray = []
 //Take Pictures using webcam __________Start________________________
 
@@ -53,16 +55,16 @@ const getVideo = () => {
 
 
     ctx.drawImage(video, 0, 0, width, height)
-	console.log(ctx)
+	const imageDataURL = photo.toDataURL('image/png');
+	setmyImage(imageDataURL)
+	console.log(myImage)
+	// console.log(ctx)
 	newArray.push(ctx)
-	setimageArray(newArray)
+	// setimageArray(newArray)
+	
 	// setimageArray( newArray => [...newArray, `${newArray.length}`]);
-	// dataURL = canvas.toDataURL(outputFormat);
 	// const imgblob = ctx.toBlob()
 	// console.log(imgblob)
-	
-
-
     
   }
  
@@ -75,10 +77,9 @@ const getVideo = () => {
 
   }
   useEffect(() => {
-    // getVideo()
-	// Interval1()
-	// Interval2()
-	
+   getVideo()
+// 	 Interval1()  
+// 	Interval2()
   }, [videoRef]);
 
 const Interval1 = () =>{
@@ -93,28 +94,28 @@ const Interval2 = () =>{
 
 const savebtn = () =>{
 	console.log(imageArray)
-	// const Data = {
-	// 	imageArray: imageArray,
-	// 	userCode: userCode,
-	// 	userInput: userInput,
-	// 	userOutput: userOutput,
-	// 	testUUID: uuid()
-	//   };
-	//   console.log(Data);
-	//   fetch('Api', {
-	// 	method: 'POST',
-	// 	headers:{
-	// 	  'Accept': 'application/json',
-	// 	  'Content-type': 'application/json'
-	// 	},
-	//    body:JSON.stringify(Data)
-	//   }).then((res) => {
-	// 		console.log(res.data);
+	const Data = {
+		imageArray: imageArray,
+		userCode: userCode,
+		userInput: userInput,
+		userOutput: userOutput,
+		testUUID: uuid()
+	  };
+	  console.log(Data);
+	  fetch('http://localhost:5000/proctoring/saveImages', {
+		method: 'POST',
+		headers:{
+		  'Accept': 'application/json',
+		  'Content-type': 'application/json'
+		},
+	   body:JSON.stringify(Data)
+	  }).then((res) => {
+			console.log(res.data);
 			
-	// 	  })
-	// 	  .catch((error) => {
-	// 		console.log(error);
-	// 	  });
+		  })
+		  .catch((error) => {
+			console.log(error);
+		  });
 }
   
   
@@ -183,6 +184,7 @@ function clearOutput() {
 
 return (
 	<>
+	
 
 <div className="container">
       <h1 className="text-center">Camera Selfie App in React</h1>
@@ -199,6 +201,12 @@ return (
  
       <br/><br/>
     </div>
+
+	<a href={myImage} download="selfie.png"
+                     >
+                        <i className="fa fa-download" aria-hidden="true"></i>
+                        download
+                    </a>
 	
 	<MainNavbar />
 	<div className="App">
