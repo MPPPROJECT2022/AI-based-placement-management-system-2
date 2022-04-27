@@ -1,0 +1,37 @@
+[
+    {
+        "display_name": "Dashboard",
+        "route": "/dashboard",
+        "icon": "bx bx-category-alt"
+    },
+    {
+        "display_name": "Aptitude",
+        "route": "/aptitude",
+        "icon": "bx bx-chart"
+    },
+    {
+        "display_name": "Code Challange",
+        "route": "/codechallange",
+        "icon": "bx bx-package"
+    },
+    {
+        "display_name": "Technical",
+        "route": "/gd",
+        "icon": "bx bx-terminal"
+    },
+    {
+        "display_name": "Group Descussion",
+        "route": "/analytics",
+        "icon": "bx bx-group"
+    },
+    {
+        "display_name": "Results",
+        "route": "/categories",
+        "icon": "bx bx-list-ol"
+    },
+    {
+        "display_name": "Jobs",
+        "route": "/discount",
+        "icon": "bx bx-briefcase"
+    }
+]
