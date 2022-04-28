@@ -98,25 +98,25 @@ def generateQuestionsFromParagraph():
 @exponential_backoff()
 def getSentencesAccordingToTopic():
     response = ac.getSentencesAccordingToTopic(request.json["topic"]);
-    return response;
+    return response
 
 #get sentences according to topic to speak for the bot
 @app.route('/GD/getSentencesToSpeak', methods = ['POST'])
 def getSentencesToSpeak():
     response = ac.getSentencesToSpeak(request.json["topic"],request.json["testUUID"]);
-    return response;
+    return response
 
 @app.route('/proctoring/saveImages', methods = ['POST'])
 @exponential_backoff()
 def getProctoringImages():
-        response = ac.getProctoringImages(request.json["userCode"],request.json["userInput"],request.json["userOutput"],request.json["imageArray"],request.json["testUUID"]);
-        return response;
+    response = ac.getProctoringImages(request.json["userCode"],request.json["userInput"],request.json["userOutput"],request.json["imageArray"],request.json["testUUID"])
+    return response
 
 @app.route('/resume/parsing', methods = ['POST'])
 @exponential_backoff()
 def resumeParsing():
-        response = ac.resumeParsing(request.json["emailId"],);
-        return response;
+    response = ac.resumeParsing(request.json["emailId"],);
+    return response;
 
 
 
