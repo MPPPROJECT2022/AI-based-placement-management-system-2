@@ -110,7 +110,12 @@ def getSentencesToSpeak():
 @app.route('/proctoring/saveImages', methods = ['POST'])
 @exponential_backoff()
 def getProctoringImages():
-    response = ac.getProctoringImages(request.json["userCode"],request.json["userInput"],request.json["userOutput"],request.json["imageArray"],request.json["testUUID"])
+    userCode = request.json["userCode"]
+    userInput = request.json["userInput"]
+    userOutput = request.json["userOutput"]
+    imageArray = request.json["imageArray"]
+    testUUID = request.json["testUUID"]
+    response = ac.getProctoringImages(userCode,userInput,userOutput,imageArray,testUUID)
     return response
 
 @app.route('/resume/parsing', methods = ['POST'])
