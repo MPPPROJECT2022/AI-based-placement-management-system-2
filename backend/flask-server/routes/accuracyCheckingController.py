@@ -1,5 +1,6 @@
 from unittest import result
 from datasets import concatenate_datasets
+from pyparsing import nums
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from pymongo import MongoClient
@@ -13,6 +14,17 @@ import argparse
 import cv2
 # from pyresparser import ResumeParser
 from docx import Document
+import base64
+
+from cv2 import line
+
+import PIL.Image as Image
+import io
+import base64
+
+#####################################################
+
+##################################################################################
 
 
 client = MongoClient(
@@ -382,12 +394,20 @@ def getSentencesToSpeak(topic, testUUID):
         return jsonify(sentenceToSendArray)
 
 
+
+
+
+
+################################### This is object detection ###################################
+
+
 def objectDetection(prototxt,model,image,confidence):
     args = {}
     args["prototxt"] = prototxt
     args["model"] = model
     args["image"] = image
     args["confidence"] = confidence
+
 
     CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
@@ -420,7 +440,7 @@ def objectDetection(prototxt,model,image,confidence):
             label = "{}: {:.2f}%".format(CLASSES[idx], confidence * 100)
             print("ch[INFO] {}".format(label))
             # print("printysss"+str(label))
-            objectsObjects.append(str(label))
+            objectsObjects.append(label)
 
             # objectsObjects.append(format(label))
             # cv2.rectangle(image, (startX, startY), (endX, endY),
@@ -435,10 +455,33 @@ def objectDetection(prototxt,model,image,confidence):
     return objectsObjects
     # return jsonify(list(data))
 
-# tArray = objectDetection('MobileNetSSD_deploy.prototxt.txt','MobileNetSSD_deploy.caffemodel','images/mobile.jpeg',0.2)
-# print(str(tArray))
+# tArray = objectDetection('MobileNetSSD_deploy.prototxt.txt','MobileNetSSD_deploy.caffemodel','images/something.png',0.2)
+# print(tArray)
 
 
-def getProctoringImages(userCode,userInput,userOutput,imageArray,testUUID):
-    print("userArray"+imageArray)
+def getProctoringImages(userCode,userInput,userOutput,imageLinksArray,testUUID):
+    ################# save the image in the db ##############
+    imageNamesArray = []
+    resultsArray = []
+    for i in range(len(imageLinksArray)):
+        numString = str(i)
+        imageNamesArray.append("images/image"+numString+".png")
+
+        splitLink = str(imageLinksArray[i]).split('data:image/png;base64,')
+
+        linkStr = b''+str(splitLink[1]).encode("ascii")
+
+
+        b = base64.b64decode(linkStr)
+        # print(b)
+        img = Image.open(io.BytesIO(b))
+        # img.show()
+
+        img.save("images/image"+str(i)+".png")
+
+        result = objectDetection('MobileNetSSD_deploy.prototxt.txt','MobileNetSSD_deploy.caffemodel',imageNamesArray[i],0.2)
+        resultsArray.append(result)
+    print(resultsArray)
+    return jsonify(resultsArray)
+    ################# save the image in the db ####################
     ## write a function to proess images from frontend
