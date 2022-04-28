@@ -466,7 +466,7 @@ def getProctoringImages(userCode,userInput,userOutput,imageLinksArray,testUUID):
         numString = str(i)
         imageNamesArray.append("images/image"+numString+".png")
 
-        splitLink = str(imageLinksArray[i]).split('data:image/jpeg;base64,')
+        splitLink = str(imageLinksArray[i]).split('data:image/png;base64,')
 
         linkStr = b''+str(splitLink[1]).encode("ascii")
 
