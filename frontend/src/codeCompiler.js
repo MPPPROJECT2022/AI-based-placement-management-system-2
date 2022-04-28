@@ -13,7 +13,7 @@ const codeQuestions = ["fighting", "learning", "qwerty"]
 
 const [testUUID, settestUUID] = useState('');
 const [imageArray, setimageArray] = useState([])
-const [myImage, setmyImage] = useState('')
+// const [myImage, setmyImage] = useState('')
 const newArray = []
 //Take Pictures using webcam __________Start________________________
 
@@ -22,7 +22,7 @@ const newArray = []
 let videoRef = useRef(null);
  
 let photoRef = useRef(null)
-
+var TestArray = []
 const getVideo = () => {
   navigator.mediaDevices
 	.getUserMedia({
@@ -56,15 +56,13 @@ const getVideo = () => {
 
     ctx.drawImage(video, 0, 0, width, height)
 	const imageDataURL = photo.toDataURL('image/png');
-	setmyImage(imageDataURL)
-	console.log(myImage)
-	// console.log(ctx)
-	newArray.push(ctx)
-	// setimageArray(newArray)
+	// setimageArray(imageDataURL)
+	// setimageArray([...imageArray, imageDataURL]);
+	imageArray.push(imageDataURL)
+
 	
-	// setimageArray( newArray => [...newArray, `${newArray.length}`]);
-	// const imgblob = ctx.toBlob()
-	// console.log(imgblob)
+	
+
     
   }
  
@@ -78,8 +76,8 @@ const getVideo = () => {
   }
   useEffect(() => {
    getVideo()
-// 	 Interval1()  
-// 	Interval2()
+	 Interval1()  
+	Interval2()
   }, [videoRef]);
 
 const Interval1 = () =>{
@@ -93,25 +91,23 @@ const Interval2 = () =>{
 }
 
 const savebtn = () =>{
-	console.log(imageArray)
+	
 	const Data = {
-		imageArray: imageArray,
 		userCode: userCode,
 		userInput: userInput,
 		userOutput: userOutput,
+		imageArray: imageArray,
 		testUUID: uuid()
 	  };
-	  console.log(Data);
 	  fetch('http://localhost:5000/proctoring/saveImages', {
 		method: 'POST',
 		headers:{
 		  'Accept': 'application/json',
 		  'Content-type': 'application/json'
-		},
-	   body:JSON.stringify(Data)
+		},Data
+	//    body:JSON.stringify(Data)
 	  }).then((res) => {
-			console.log(res.data);
-			
+			console.log(res.data);			
 		  })
 		  .catch((error) => {
 			console.log(error);
@@ -202,11 +198,11 @@ return (
       <br/><br/>
     </div>
 
-	<a href={myImage} download="selfie.png"
+	{/* <a href={myImage} download="selfie.png"
                      >
                         <i className="fa fa-download" aria-hidden="true"></i>
                         download
-                    </a>
+                    </a> */}
 	
 	<MainNavbar />
 	<div className="App">

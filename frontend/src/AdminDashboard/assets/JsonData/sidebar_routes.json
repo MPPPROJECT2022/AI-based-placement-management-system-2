@@ -16,12 +16,12 @@
     },
     {
         "display_name": "Technical",
-        "route": "/gd",
+        "route": "/technical",
         "icon": "bx bx-terminal"
     },
     {
         "display_name": "Group Descussion",
-        "route": "/analytics",
+        "route": "/gd",
         "icon": "bx bx-group"
     },
     {

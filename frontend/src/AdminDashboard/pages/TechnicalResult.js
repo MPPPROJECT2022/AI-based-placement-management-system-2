@@ -1,44 +1,70 @@
-import React from 'react'
-import Table from '../components/table/Table'
-
-const TechnicalTableHead = [
-    '',
-    'name',
-    'email',
-    'phone',
-    'total exams',
-    'total percentage',
-    'location'
-]
-
-const renderHead = (item, index) => <th key={index}>{item}</th>
+import React, { useEffect, useState } from "react"
+import './resultStyle.css'
 
 function TechnicalResult() {
-    return (
-        <>
+    var myNewArray = [];
+    const [techresultData, settechresultData] = useState([])
+ 
+  const loadData = () => {
+        fetch('http://localhost:5000/technical/getReportWithtestUUID',{
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({testUUID:"testUUID"})
+        })
+          .then((response) => {
+            return response.json(); 
+          })
+          .then((myJson) => {
+            var myNewArray = myJson.map(obj => ({...obj}));
+            console.log(myNewArray)
+            // settechresultData(myNewArray)
+            // console.log(techresultData)
+          });
+    }
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+
+  return (
+    <>
+      <div>
+        <div className="row">
+          <div className="col-12">
+            <div className="card">
             <div>
-                <h2 className="page-header">
-                    customers
-                </h2>
-                <div className="row">
-                    <div className="col-12">
-                        <div className="card">
-                            <div className="card__body">
-                                {/* <Table
-                                    limit='10'
-                                    headData={TechnicalTableHead}
-                                    renderHead={(item, index) => renderHead(item, index)}
-                                    bodyData={customerList}
-                                    renderBody={(item, index) => renderBody(item, index)}
-                                /> */}
-                                some content here
-                            </div>
-                        </div>
+    <button className="gd-btn" onClick={loadData}>Create New Group Descussion Topic</button>
+    </div>
+              <div className="card__body">
+                <div className = "content-result">
+                  {/* {gdresultData.map((item, index) => (
+                    <div key={index}> 
+                    <h5>Test ID: {item.testUUID}</h5>
+                    <p>User Name: Something</p>
+                    <p>User Email: mail@mail.com</p>
+                    <h2 className= "title-result">Topic: {item.topic}</h2>                 
+                      {item.result.map((c, i) => (
+                        <ul key={i}>
+                        <li><h2>Point: </h2>{c.point}</li>
+                        <li><h2>Accuracy: </h2>{c.accuracy}</li>
+                        <li><h2>Grammer Replacements: </h2>{c.grammerReplacement}</li>
+                        <li><h2>Quality: </h2>{c.quality}</li>
+                          <hr className = "btm-line"/>
+                        </ul>
+                      ))}
+                     
                     </div>
+                  ))} */}
                 </div>
+
+              </div>
             </div>
-        </>
-    )
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
 
 export default TechnicalResult

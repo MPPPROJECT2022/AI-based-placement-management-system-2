@@ -23,6 +23,7 @@ var skipValue = false;
   const [isListening, setIsListening] = useState(false)
   const [note, setNote] = useState(null)
   const [userAnswer, setuserAnswer] = useState([])
+  const [getQuestions, setgetQuestions] = useState([])
   const { speak } = useSpeechSynthesis();
 
   // Post Data UseState
@@ -33,15 +34,131 @@ var skipValue = false;
   const [topic, setTopic] = useState([]);
   const [fetchQuestions, setfetchQuestions] = useState([])
 
+
+  //Take Pictures using webcam __________Start________________________
+
+
+
+// let videoRef = useRef(null);
+ 
+// let photoRef = useRef(null)
+
+// const getVideo = () => {
+//   navigator.mediaDevices
+// 	.getUserMedia({
+// 	  video: true
+// 	})
+// 	.then((stream) => {
+// 	  let video = videoRef.current;
+// 	  video.srcObject = stream;
+// 	  video.play();
+// 	})
+// 	.catch((err) => {
+// 	  console.error(err);
+// 	});
+// };
+ 
+
+//   const takePicture = () => {
+//     const width = 400;
+//     const height = width / (16 / 9);
+    
+//     let video = videoRef.current
+ 
+//     let photo = photoRef.current
+ 
+//     photo.width = width
+ 
+//     photo.height = height
+
+// 	let ctx = photo.getContext('2d')
+
+
+//     ctx.drawImage(video, 0, 0, width, height)
+// 	const imageDataURL = photo.toDataURL('image/png');
+// 	setmyImage(imageDataURL)
+// 	console.log(myImage)
+// 	// console.log(ctx)
+// 	newArray.push(ctx)
+// 	// setimageArray(newArray)
+	
+// 	// setimageArray( newArray => [...newArray, `${newArray.length}`]);
+// 	// const imgblob = ctx.toBlob()
+// 	// console.log(imgblob)
+    
+//   }
+ 
+//   const clearImage = () => {
+// 	let photo = photoRef.current
+ 
+//     let ctx = photo.getContext('2d')
+ 
+//     ctx.clearRect(0,0,photo.width,photo.height)
+
+//   }
+//   useEffect(() => {
+//    getVideo()
+// // 	 Interval1()  
+// // 	Interval2()
+//   }, [videoRef]);
+
+// const Interval1 = () =>{
+// 	const id1 = setInterval(takePicture, 10000)
+//   return () => clearInterval(id1)
+// }
+
+// const Interval2 = () =>{
+// 	const id3 = setInterval(clearImage, 11000)
+//   return () => clearInterval(id3)
+// }
+
+// const savebtn = () =>{
+// 	console.log(imageArray)
+// 	const Data = {
+// 		imageArray: imageArray,
+// 		userCode: userCode,
+// 		userInput: userInput,
+// 		userOutput: userOutput,
+// 		testUUID: uuid()
+// 	  };
+// 	  console.log(Data);
+// 	  fetch('http://localhost:5000/proctoring/saveImages', {
+// 		method: 'POST',
+// 		headers:{
+// 		  'Accept': 'application/json',
+// 		  'Content-type': 'application/json'
+// 		},
+// 	   body:JSON.stringify(Data)
+// 	  }).then((res) => {
+// 			console.log(res.data);
+			
+// 		  })
+// 		  .catch((error) => {
+// 			console.log(error);
+// 		  });
+// }
+  
+  
+
+
+//Take Pictures using webcam __________End________________________
+
+
+
   
 
   useEffect(() => {
     handleListen()
   }, [isListening])
 
+  useEffect(() => {
+    
+  }, [userAnswer])
+
 
 var myquestionArray= []
-fetch('http://localhost:5000/technical/getTechnicalQuestions',{
+
+  fetch('http://localhost:5000/technical/getTechnicalQuestions',{
   method: 'POST',
   // body: JSON.stringify({topic:'java'})
 })
@@ -50,20 +167,14 @@ fetch('http://localhost:5000/technical/getTechnicalQuestions',{
     
   })
   .then((myJson) => {
-
-    console.log(myJson)
     myquestionArray = myJson.map(obj => ({...obj}));
-   
   });
-
-  console.log(myquestionArray)
   
  
 const startInterview  = () =>{
   let tempArray = []
   tempArray = myquestionArray;
   let secondArray = [];
- 
 //   var secondArray = [tempArray.length-1];
 let result
   function getRandome(min, max){
@@ -143,8 +254,8 @@ while(i<= secondArray.length-1){
     
   // }
    const handleSaveNote = async (e) => {
-     console.log(note)
-      setuserAnswer([...userAnswer, note])
+    //  setuserAnswer([...userAnswer, note])
+    userAnswer.push(note)
       setNote('')
     const Data = {
       topic: topic,

@@ -11,7 +11,7 @@ import nltk
 import numpy as np
 import argparse
 import cv2
-from pyresparser import ResumeParser
+# from pyresparser import ResumeParser
 from docx import Document
 
 
@@ -228,7 +228,7 @@ def getGDResultsAccordingToTestUUID(testUUID):
     return jsonify(data)
 
 
-def getTechnicalQuetechnistions():
+def getTechnicalQuestions():
     records = db.technicalquestions
 
     cursor1 = records.find()
