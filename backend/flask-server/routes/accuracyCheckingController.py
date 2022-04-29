@@ -460,6 +460,11 @@ def objectDetection(prototxt,model,image,confidence):
 
 def getProctoringImages(userCode,userInput,userOutput,imageLinksArray,testUUID):
     ################# save the image in the db ##############
+    flags = {}
+    multiplePersons = False
+    mobileSpotted = False
+    screenExited = False
+
     imageNamesArray = []
     resultsArray = []
     for i in range(len(imageLinksArray)):
@@ -481,6 +486,40 @@ def getProctoringImages(userCode,userInput,userOutput,imageLinksArray,testUUID):
         result = objectDetection('MobileNetSSD_deploy.prototxt.txt','MobileNetSSD_deploy.caffemodel',imageNamesArray[i],0.2)
         resultsArray.append(result)
     print(resultsArray)
-    return jsonify(resultsArray)
+    person = 0
+    for i in range(len(resultsArray)):
+        person = 0
+        for j in range(len(resultsArray[i])):
+            if(str(resultsArray[i][j]).find("person")!=-1):
+                person +=1
+                if(person>1):
+                    flags['multiplePersons'] = True
+            elif(str(resultsArray[i][j]).find("tvmonitor")!=-1):
+                    flags['tvmonitor'] = True
+
+    
+    records = db.proctoredResult
+    newProctoredRecord = {
+            "userCode":userCode,
+            "userInput":userInput,
+            "userOutput":userOutput,
+            "testUUID":testUUID,
+            "flags":flags
+        }
+    records.insert_one(newProctoredRecord)
+    return "records inserted"
+    # return jsonify(newProctoredRecord)
     ################# save the image in the db ####################
     ## write a function to proess images from frontend
+
+def getSavedImagesResult(testUUID):
+    records = db.proctoredResult
+
+    # list = []
+    cursor1 = records.find({'testUUID': str(testUUID)})
+
+    data = []
+    for doc in cursor1:
+        doc['_id'] = str(doc['_id'])  # This does the trick!
+        data.append(doc)
+    return jsonify(data)

@@ -113,16 +113,21 @@ def getProctoringImages():
     userInput = request.json["userInput"]
     userOutput = request.json["userOutput"]
     imageArray = request.json["imageArray"]
-    testUUID = request.json["testUUID"]
+    testUUID = request.json["testUUID"],
     response = ac.getProctoringImages(userCode,userInput,userOutput,imageArray,testUUID)
     return response
 
-@app.route('/resume/parsing', methods = ['POST'])
-@exponential_backoff()
-def resumeParsing():
-    response = ac.resumeParsing(request.json["emailId"],);
-    return response;
+# @app.route('/resume/parsing', methods = ['POST'])
+# @exponential_backoff()
+# def resumeParsing():
+#     response = ac.resumeParsing(request.json["emailId"],);
+#     return response;
 
+@app.route('/proctoring/getSavedImagesResult', methods = ['POST'])
+@exponential_backoff()
+def getSavedImagesResult():
+    response = ac.getSavedImagesResult(request.json["testUUID"]);
+    return response;
 
 
 
