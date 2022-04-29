@@ -51,6 +51,7 @@ def generateReportOfAParticularTest():
 	return response;
 
 
+#Here frontend will send a paragraph which afterwards will be split and converted into sentences and saved in the db
 @app.route('/GD/convertParagraphToSentences', methods = ['POST'])
 @exponential_backoff()
 def generateSentencesFromAParagraph():
@@ -59,6 +60,8 @@ def generateSentencesFromAParagraph():
 	obj['splitSentences']=response;
 	return obj;
 
+
+#Here user's spoken sentences will be sent and then compared, processed and then will be stored in the DB 
 @app.route('/GD/chechAccuracyOfIndividualSentences', methods = ['POST'])
 @exponential_backoff()
 def chechAccuracyOfIndividualSentences():
@@ -67,33 +70,35 @@ def chechAccuracyOfIndividualSentences():
     return jsonify(response); 
         # obj['splitSentences']=response;
 	
-
+# This will bring you the report of the GD round userSpoken sentences with accuracy and grammatical mistakes
 @app.route('/GD/getGDReportAccordingTestUUID', methods = ['POST'])
 def getGDReportAccordingTestUUID():
     response = ac.getGDResultsAccordingToTestUUID(request.json["testUUID"]);
     return response;
 
+
+# This will bring you the stored technical sentences from the Database
 @app.route('/technical/getTechnicalQuestions', methods = ['POST'])
 @exponential_backoff()
 def getTechnicalQuestions():
 	response = ac.getTechnicalQuestions();
 	return response;
 
-
+#This will store single sentence in the DB
 @app.route('/technical/storeSingleQuestion', methods = ['POST'])
 @exponential_backoff()
 def storeSingleQuestionAnswerKeyword():
 	response = ac.storeSingleQuestionAnswerKeyword(request.json["question"].request.json["answer"],request.json["requiredWords"],request.json["topic"]);
 	return response;
 
-
+# Here frontend will give a paragraph and from that sentences will be generated which will then be stored in the DB under the name of Topic
 @app.route('/technical/generateQuestionsFromParagraph', methods = ['POST'])
 @exponential_backoff()
 def generateQuestionsFromParagraph():
     response = ac.generateQuestionsFromParagraph(request.json["topic"],request.json["paragraph"][0]);
     return response;
 
-
+#HEre the front end will get the generated sentences froim the database with the reference of topic name
 @app.route('/GD/getSentencesAccordingToTopic', methods = ['POST'])
 @exponential_backoff()
 def getSentencesAccordingToTopic():
@@ -106,6 +111,8 @@ def getSentencesToSpeak():
     response = ac.getSentencesToSpeak(request.json["topic"],request.json["testUUID"]);
     return response
 
+
+#THis will save the proctored images after processing and verifying them 
 @app.route('/proctoring/saveImages', methods = ['POST'])
 @exponential_backoff()
 def getProctoringImages():
@@ -123,6 +130,8 @@ def getProctoringImages():
 #     response = ac.resumeParsing(request.json["emailId"],);
 #     return response;
 
+
+#This will bring the result of the proctoring according to the s
 @app.route('/proctoring/getSavedImagesResult', methods = ['POST'])
 @exponential_backoff()
 def getSavedImagesResult():
