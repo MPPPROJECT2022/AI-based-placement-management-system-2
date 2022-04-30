@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect , useRef} from 'react'
 import './module3.css'
 import { useSpeechSynthesis } from "react-speech-kit"
 import Navbar from './MainNavbar';
-
+import { v4 as uuid } from 'uuid';
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition
 const mic = new SpeechRecognition()
@@ -12,6 +12,7 @@ mic.interimResults = true
 mic.lang = 'en-US'
 
 function App() {
+  const [imageArray, setimageArray] = useState([])
   const [isListening, setIsListening] = useState(false)
   const [note, setNote] = useState(null)
   const [userGDAnswer, setuserGDAnswer] = useState(null)
@@ -24,6 +25,119 @@ function App() {
   }, [isListening])
 
  
+
+//Take Pictures using webcam __________Start________________________
+
+
+
+let videoRef = useRef(null);
+ 
+let photoRef = useRef(null)
+var TestArray = []
+const getVideo = () => {
+  navigator.mediaDevices
+	.getUserMedia({
+	  video: true
+	})
+	.then((stream) => {
+	  let video = videoRef.current;
+	  video.srcObject = stream;
+	  video.play();
+	})
+	.catch((err) => {
+	  console.error(err);
+	});
+};
+ 
+
+  const takePicture = () => {
+    const width = 400;
+    const height = width / (16 / 9);
+    
+    let video = videoRef.current
+ 
+    let photo = photoRef.current
+ 
+    photo.width = width
+ 
+    photo.height = height
+
+	let ctx = photo.getContext('2d')
+
+
+    ctx.drawImage(video, 0, 0, width, height)
+	const imageDataURL = photo.toDataURL('image/png');
+	// setimageArray(imageDataURL)
+	// setimageArray([...imageArray, imageDataURL]);
+	imageArray.push(imageDataURL)
+
+	
+	
+
+    
+  }
+ 
+  const clearImage = () => {
+	let photo = photoRef.current
+ 
+    let ctx = photo.getContext('2d')
+ 
+    ctx.clearRect(0,0,photo.width,photo.height)
+
+  }
+  useEffect(() => {
+   getVideo()
+	 Interval1()  
+	Interval2()
+  }, [videoRef]);
+
+const Interval1 = () =>{
+	const id1 = setInterval(takePicture, 40000)
+  return () => clearInterval(id1)
+}
+
+const Interval2 = () =>{
+	const id3 = setInterval(clearImage, 42000)
+  return () => clearInterval(id3)
+}
+
+const savebtn = () =>{
+	var userCode;
+  var userInput;
+  var userOutput;
+	const data1 = {
+		userCode: "userCode",
+		userInput: "userInput",
+		userOutput: "userOutput",
+		imageArray: imageArray,
+		testUUID: uuid()
+		
+	  };console.log(typeof(data1))
+	  fetch('http://localhost:5000/proctoring/saveImages', {
+		method: 'POST',
+		headers:{
+		  'Accept': 'application/json',
+		  'Content-type': 'application/json'
+		},
+	   body:JSON.stringify(data1)
+	  }).then((res) => {
+			console.log(res.data);			
+		  })
+		  .catch((error) => {
+			console.log(error);
+		  });
+}
+  
+  
+
+
+//Take Pictures using webcam __________End________________________
+
+
+
+
+
+
 
   var flagListen = false;
 
@@ -268,8 +382,8 @@ function onclick(){
       <Navbar />
       <h1>Group Descussion</h1>
       {/* <button onClick={FetchSentences}>Get Data</button> */}
-      <div className="container">
-        <div className="box">
+      <div className="container1">
+        <div className="box1">
           <h2>Current Note</h2>
           {isListening ? <span>🎙️</span> : <span>🛑🎙️</span>}
           <button onClick={()=>{  onclick(); setIsListening(prevState => !prevState);}}>

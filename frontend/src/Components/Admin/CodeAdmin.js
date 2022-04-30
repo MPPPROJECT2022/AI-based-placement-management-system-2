@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../MainNavbar'
 import '../../Styles/Admin.css'
 import axios from "axios";
-import Selfie from '../selfie'
+
 
 
 
@@ -51,7 +51,7 @@ function CodeAdmin() {
   return (
     <>
     <Navbar />
-    <Selfie />
+  
     <div className= "container">
     <form className="form-control" onSubmit={onSubmit}>
         <div className="form-group">

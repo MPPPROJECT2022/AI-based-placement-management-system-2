@@ -16,10 +16,10 @@
   --box-shadow: #f3f1f1;
 }
 
-html {
+/* html {
   font-size: 2vw;
   overflow-x: hidden
-}
+} */
 
 .primary {
   color: var(--primary);
@@ -58,11 +58,11 @@ p, span, a {
   font-family: 'Oxygen', sans-serif;
 } */
 
-body {
+/* body {
   margin: 0;
   padding: 0;
   background-color: #f7f7f763;
-}
+} */
 
 .hero {
   height: 100vh;

@@ -9,7 +9,7 @@ import { v4 as uuid } from 'uuid';
 import Selfie from './Components/selfie'
 import ls from 'local-storage'
 function App() {
-const codeQuestions = ["fighting", "learning", "qwerty"]
+const codeQuestions = ["Coding Round"]
 
 const [testUUID, settestUUID] = useState('');
 const [imageArray, setimageArray] = useState([])
@@ -81,31 +81,32 @@ const getVideo = () => {
   }, [videoRef]);
 
 const Interval1 = () =>{
-	const id1 = setInterval(takePicture, 10000)
+	const id1 = setInterval(takePicture, 40000)
   return () => clearInterval(id1)
 }
 
 const Interval2 = () =>{
-	const id3 = setInterval(clearImage, 11000)
+	const id3 = setInterval(clearImage, 42000)
   return () => clearInterval(id3)
 }
 
 const savebtn = () =>{
 	
-	const Data = {
+	const data1 = {
 		userCode: userCode,
 		userInput: userInput,
 		userOutput: userOutput,
 		imageArray: imageArray,
 		testUUID: uuid()
-	  };
+		
+	  };console.log(typeof(data1))
 	  fetch('http://localhost:5000/proctoring/saveImages', {
 		method: 'POST',
 		headers:{
 		  'Accept': 'application/json',
 		  'Content-type': 'application/json'
-		},Data
-	//    body:JSON.stringify(Data)
+		},
+	   body:JSON.stringify(data1)
 	  }).then((res) => {
 			console.log(res.data);			
 		  })
@@ -182,7 +183,7 @@ return (
 	<>
 	
 
-<div className="container">
+{/* <div className="container">
       <h1 className="text-center">Camera Selfie App in React</h1>
  
       <video ref={videoRef} className="container"></video>
@@ -197,7 +198,7 @@ return (
  
       <br/><br/>
     </div>
-
+ */}
 	{/* <a href={myImage} download="selfie.png"
                      >
                         <i className="fa fa-download" aria-hidden="true"></i>

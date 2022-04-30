@@ -9,7 +9,7 @@ function TechnicalResult() {
         fetch('http://localhost:5000/technical/getReportWithtestUUID',{
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({testUUID:"testUUID"})
+          body: JSON.stringify({testUUID:"04875132-a9ee-49d4-99f6-ea19198c3a10"})
         })
           .then((response) => {
             return response.json(); 
@@ -17,7 +17,7 @@ function TechnicalResult() {
           .then((myJson) => {
             var myNewArray = myJson.map(obj => ({...obj}));
             console.log(myNewArray)
-            // settechresultData(myNewArray)
+            settechresultData(myNewArray)
             // console.log(techresultData)
           });
     }
@@ -34,28 +34,25 @@ function TechnicalResult() {
           <div className="col-12">
             <div className="card">
             <div>
-    <button className="gd-btn" onClick={loadData}>Create New Group Descussion Topic</button>
+    <button className="gd-btn" onClick={loadData}>Create New Technical Test</button>
     </div>
               <div className="card__body">
                 <div className = "content-result">
-                  {/* {gdresultData.map((item, index) => (
+                  {techresultData.map((item, index) => (
                     <div key={index}> 
                     <h5>Test ID: {item.testUUID}</h5>
                     <p>User Name: Something</p>
                     <p>User Email: mail@mail.com</p>
                     <h2 className= "title-result">Topic: {item.topic}</h2>                 
-                      {item.result.map((c, i) => (
-                        <ul key={i}>
-                        <li><h2>Point: </h2>{c.point}</li>
-                        <li><h2>Accuracy: </h2>{c.accuracy}</li>
-                        <li><h2>Grammer Replacements: </h2>{c.grammerReplacement}</li>
-                        <li><h2>Quality: </h2>{c.quality}</li>
+                     <ul>
+                     <li><h2>Question: </h2>{item.question}</li>
+                        <li><h2>Original Answer: </h2>{item.answer}</li>
+                        <li><h2>User Answer: </h2>{item.userAnswer}</li>
+                        <li><h2>accuracy: </h2>{item.accuracy}</li>
                           <hr className = "btm-line"/>
-                        </ul>
-                      ))}
-                     
+                          </ul>
                     </div>
-                  ))} */}
+                  ))}
                 </div>
 
               </div>

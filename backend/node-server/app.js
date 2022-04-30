@@ -4,27 +4,27 @@ const Axios = require("axios");
 var session = require('express-session')
 var cors = require('cors')
 const app =  express();
-//Aptitude ________________Start_______________
-const user = require("./Aptitude/routes/user");
-const teacher = require("./Aptitude/routes/teacher");
-const student = require("./Aptitude/routes/student");
-// const InitiateMongoServer = require("./config/db");
+
+
+
+
+
+
+//Apti____________
+const user = require("./routes/user");
+const teacher = require("./routes/teacher");
+const student = require("./routes/student");
 const cookieParser = require("cookie-parser");
 var path = require("path");
 require('dotenv').config()
-
-app.use("./Aptitude/routes/user", user);
-app.use("./Aptitude/routes/teacher", teacher);
-app.use("./Aptitude/routes/student", student);
-
-
-//Aptitude code Here____________End_________________
 
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(bodyParser());
 
 // trust first proxy
 app.set('trust proxy', 1) 
@@ -36,9 +36,21 @@ app.use(session({
 }))
 
 
+app.use("/user", user);
+app.use("/teacher", teacher);
+app.use("/student", student);
+//Apti End______________
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+
+
+
+
+
+
 
 
 
@@ -49,10 +61,9 @@ const technicalRoutes = require("./routes/technicalRoutes");
 const groupDiscussionRoutes = require("./routes/groupDiscussionRoutes");
 
 
-app.use(bodyParser());
-var cors = require('cors')
 
-app.use(cors())
+
+
 const port = 3000;
 //compiler code here_______________________Start________________-________
 app.use(express.json());

@@ -482,6 +482,6 @@ def getProctoringImages(userCode,userInput,userOutput,imageLinksArray,testUUID):
         result = objectDetection('MobileNetSSD_deploy.prototxt.txt','MobileNetSSD_deploy.caffemodel',imageNamesArray[i],0.2)
         resultsArray.append(result)
     print(resultsArray)
-    return jsonify(resultsArray)
+    return jsonify(str(resultsArray))
     ################# save the image in the db ####################
     ## write a function to proess images from frontend

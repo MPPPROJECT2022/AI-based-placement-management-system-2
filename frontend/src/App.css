@@ -1,4 +1,4 @@
-/* .App{
+.App{
   max-height: 100vh;
   width: 100%;
   overflow-y: hidden;
@@ -97,4 +97,4 @@
   .run-btn:active{
   background-color: #6e9427;
   }
-   */
+  
