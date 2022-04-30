@@ -173,6 +173,18 @@ def checkImagesForApti():
     return response;
 
 
+@app.route('/coding/storeTestCases', methods = ['POST'])
+@exponential_backoff()
+def storeTestCases():
+    problemStatement = request.json["problemStatement"]
+    testInput = request.json["testInput"]
+    expectedOutput = request.json["expectedOutput"]
+    userEmail = request.json["userEmail"]
+    testUUID = request.json["testUUID"]
+
+
+    response = ac.storeTestCases(problemStatement,testInput,expectedOutput,userEmail,testUUID);
+    return response;
 
 
 

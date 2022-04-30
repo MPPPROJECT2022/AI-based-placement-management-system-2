@@ -686,3 +686,19 @@ def checkImagesForApti(testUUID,userEmail,imageLinksArray):
     # return jsonify(newProctoredRecord)
     ################# save the image in the db ####################
     ## write a function to proess images from frontend
+
+
+
+def storeTestCases(problemStatement,testInput,expectedOutput,userEmail,testUUID):
+
+    records = db.codingTextCasesWithQuestions
+    # print(records.count_documents({}))
+    newTestRecord = {
+        "problemStatement":problemStatement,
+        "testInput": testInput,
+        "expectedOutput": expectedOutput,
+        "userEmail": userEmail,
+        "testUUID": testUUID,
+    }
+
+    return jsonify(records.insert_one(newTestRecord))
