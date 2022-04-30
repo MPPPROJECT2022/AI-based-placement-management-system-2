@@ -668,7 +668,7 @@ def checkImagesForApti(testUUID,userEmail,imageLinksArray):
 
 
 
-def storeTestCases(problemStatement,testInput,expectedOutput,userEmail,instructions,testUUID):
+def storeTestCases(problemStatement,testInput,expectedOutput,instructions):
 
     records = db.codingTextCasesWithQuestions
     # print(records.count_documents({}))
@@ -676,10 +676,20 @@ def storeTestCases(problemStatement,testInput,expectedOutput,userEmail,instructi
         "problemStatement":problemStatement,
         "testInput": testInput,
         "expectedOutput": expectedOutput,
-        "userEmail": userEmail,
         "instructions": instructions,
-        "testUUID": testUUID,
     }
 
     records.insert_one(newTestRecord)
     return "Test Cases Stored"
+
+def getTestCases():
+
+    records = db.codingTextCasesWithQuestions
+    # print(records.count_documents({}))
+    cursor1 = records.find()
+
+    data = []
+    for doc in cursor1:
+        doc['_id'] = str(doc['_id'])  # This does the trick!
+        data.append(doc)
+    return jsonify(data)

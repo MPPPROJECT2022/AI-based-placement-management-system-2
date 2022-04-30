@@ -175,13 +175,22 @@ def storeTestCases():
     problemStatement = request.json["problemStatement"]
     testInput = request.json["testInput"]
     expectedOutput = request.json["expectedOutput"]
-    userEmail = request.json["userEmail"]
     instructions = request.json["instructions"]
-    testUUID = request.json["testUUID"]
 
 
-    response = ac.storeTestCases(problemStatement,testInput,expectedOutput,userEmail,instructions,testUUID);
+    response = ac.storeTestCases(problemStatement,testInput,expectedOutput,instructions);
     return response;
+
+@app.route('/coding/getTestCases', methods = ['POST'])
+@exponential_backoff()
+def getTestCases():
+
+    response = ac.getTestCases();
+    return response;
+
+
+
+
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=5000)
