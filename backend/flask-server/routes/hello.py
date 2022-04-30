@@ -148,6 +148,30 @@ def checkImagesForTechnical():
     response = ac.checkImagesForTechnical(testUUID,userEmail,imageArray);
     return response;
 
+@app.route('/GD/checkImagesForGD', methods = ['POST'])
+@exponential_backoff()
+def checkImagesForGD():
+    imageArray = request.json["imageArray"]
+    testUUID = request.json["testUUID"]
+    userEmail = request.json["userEmail"]
+
+    response = ac.checkImagesForGD(testUUID,userEmail,imageArray);
+    return response;
+
+
+
+
+
+@app.route('/GD/checkImagesForApti', methods = ['POST'])
+@exponential_backoff()
+def checkImagesForApti():
+    imageArray = request.json["imageArray"]
+    testUUID = request.json["testUUID"]
+    userEmail = request.json["userEmail"]
+
+    response = ac.checkImagesForApti(testUUID,userEmail,imageArray);
+    return response;
+
 
 
 
