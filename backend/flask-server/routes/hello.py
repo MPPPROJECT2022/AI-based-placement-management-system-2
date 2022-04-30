@@ -138,6 +138,16 @@ def getSavedImagesResult():
     response = ac.getSavedImagesResult(request.json["testUUID"]);
     return response;
 
+@app.route('/technical/checkImagesForTechnical', methods = ['POST'])
+@exponential_backoff()
+def checkImagesForTechnical():
+    imageArray = request.json["imageArray"]
+    testUUID = request.json["testUUID"]
+    userEmail = request.json["userEmail"]
+
+    response = ac.checkImagesForTechnical(testUUID,userEmail,imageArray);
+    return response;
+
 
 
 
