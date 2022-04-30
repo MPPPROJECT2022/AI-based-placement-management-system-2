@@ -7,7 +7,8 @@ import Customers from '../pages/Customers'
 import Aptitude from '../pages/AptiResult'
 import GDResult from '../pages/GDResult'
 import TechnicalResult from '../pages/TechnicalResult'
-import codeChallangeResult from '../pages/codeChallangeResult'
+import codeChallangeResult from '../pages/CodeChallangeResult'
+import addCodeQuestions from '../pages/AddCodeQuestions'
 
 const Routes = () => {
     return (
@@ -18,6 +19,7 @@ const Routes = () => {
             <Route path='/technical' exact component={TechnicalResult}/>
             <Route path='/gd' exact component={GDResult}/>
             <Route path='/codechallange' exact component={codeChallangeResult}/> 
+            <Route path='/addCodeQuestions' exact component={addCodeQuestions}/> 
         </Switch>
     )
 }

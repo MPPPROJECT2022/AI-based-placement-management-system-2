@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react"
-
+import { useHistory } from "react-router-dom";
 function CodeChallangeResult() {
   const [coderesultData, setcoderesultData] = useState([])
+  const history = useHistory();
+  
+  const handleRoute = () =>{ 
+    history.push("/addCodeQuestions");
+  }
   var myNewArray = [];
+
 
   const loadData = () => {
     fetch('http://localhost:5000/proctoring/getSavedImagesResult', {
@@ -33,7 +39,7 @@ function CodeChallangeResult() {
           <div className="col-12">
             <div className="card">
               <div>
-                <button className="gd-btn" onClick={loadData}>Create New Technical Test</button>
+                <button className="gd-btn" onClick={handleRoute}>Create New Code Challange</button>
               </div>
               <div className="card__body">
                 <div className="content-result">
