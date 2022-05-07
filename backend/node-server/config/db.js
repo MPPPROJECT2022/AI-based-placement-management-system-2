@@ -1,22 +1,21 @@
-const mongoose = require("mongoose");
-require('dotenv').config()
+//Connection file to mongo db
+import mongoose from "mongoose";
+import colors from "colors";
 
-// Replace this with your MONGOURI.
-const MONGOURI =
-"mongodb+srv://mpp:mpp@cluster0.mxixf.mongodb.net/mppproject?retryWrites=true&w=majority";
+const MONGO_URI = "mongodb+srv://test:test@cluster0.jo8ln.mongodb.net/test?retryWrites=true&w=majority"
 
-const InitiateMongoServer = async () => {
+const connectDB = async () => {
   try {
-    await mongoose.connect(MONGOURI, {
-      useNewUrlParser: true,
+    const conn = await mongoose.connect(MONGO_URI, {
       useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useCreateIndex: true,
     });
-    mongoose.set("useFindAndModify", false);
-    console.log("Connected to DB !!");
-  } catch (e) {
-    console.log(e);
-    throw e;
+    console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
+  } catch (error) {
+    console.error(`Error: ${error.message}`.red.bold);
+    process.exit();
   }
 };
 
-module.exports = InitiateMongoServer;
+export default connectDB;
