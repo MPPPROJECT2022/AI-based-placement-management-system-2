@@ -2,6 +2,8 @@ from flask import Flask,request,jsonify
 import accuracyCheckingController as ac
 from flask_cors import CORS,cross_origin
 import time
+import uuid
+
 
 from functools import wraps, partial
 def exponential_backoff(func=None, seconds=10, attempts=10):
@@ -188,7 +190,45 @@ def getTestCases():
     response = ac.getTestCases();
     return response;
 
+@app.route('/testCreation/createTest', methods = ['POST'])
+@exponential_backoff()
+def createTest():
 
+    userEmail = request.json["userEmail"]
+    testName = request.json["testName"]
+    collegeCode = request.json["collegeCode"]
+    testCode = request.json["collegeCode"]
+    # uuid.uuid4()
+    # str(uuid.uuid4())
+    # testCode = uuid.uuid4().hex
+    response = ac.createTest(userEmail,testName,collegeCode,testCode);
+    return response;
+
+@app.route('/testCreation/getTestWithEmail', methods = ['POST'])
+@exponential_backoff()
+def getTestWithEmail():
+
+    userEmail = request.json["userEmail"]
+
+    # uuid.uuid4()
+    # str(uuid.uuid4())
+    # testCode = uuid.uuid4().hex
+    response = ac.getTestWithEmail(userEmail);
+    return response;
+
+@app.route('/testCreation/getTestWithCodes', methods = ['POST'])
+@exponential_backoff()
+def getTestWithCodes():
+
+    userEmail = request.json["userEmail"]
+    testName = request.json["testName"]
+    collegeCode = request.json["collegeCode"]
+    testCode = request.json["collegeCode"]
+    # uuid.uuid4()
+    # str(uuid.uuid4())
+    # testCode = uuid.uuid4().hex
+    response = ac.getTestWithCodes(userEmail,testName,collegeCode,testCode);
+    return response;
 
 
 

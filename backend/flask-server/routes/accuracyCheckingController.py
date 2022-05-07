@@ -693,3 +693,41 @@ def getTestCases():
         doc['_id'] = str(doc['_id'])  # This does the trick!
         data.append(doc)
     return jsonify(data)
+
+
+def createTest(userEmail,testName,collegeCode,testCode):
+    records = db.tests
+    # print(records.count_documents({}))
+    newTestRecord = {
+        "userEmail":userEmail,
+        "testName": testName,
+        "collegeCode": collegeCode,
+        "testCode": testCode
+    }
+
+    records.insert_one(newTestRecord)
+    return "Test created"
+
+def getTestWithEmail(userEmail):
+    records = db.tests
+    # list = []
+    cursor1 = records.find({'userEmail': userEmail})
+
+    data = []
+    for doc in cursor1:
+        doc['_id'] = str(doc['_id'])  # This does the trick!
+        data.append(doc)
+    return jsonify(data)
+
+def getTestWithCodes(collegeCode,testCode):
+    records = db.tests
+    # list = []
+    cursor1 = records.find({'collegeCode': collegeCode,'testCode':testCode})
+
+    data = []
+    for doc in cursor1:
+        doc['_id'] = str(doc['_id'])  # This does the trick!
+        data.append(doc)
+    return jsonify(data)
+
+
