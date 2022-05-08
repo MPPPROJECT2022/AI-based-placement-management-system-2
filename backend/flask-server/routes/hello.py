@@ -230,6 +230,43 @@ def getTestWithCodes():
     response = ac.getTestWithCodes(userEmail,testName,collegeCode,testCode);
     return response;
 
+##### Aptitude ##################################
+@app.route('/aptitude/saveQuestions', methods = ['POST'])
+@exponential_backoff()
+def aptitudeSaveQuestions():
+
+    testId = request.json["testId"]
+    orgName = request.json["orgName"]
+    question = request.json["question"]
+    options = request.json["options"]
+    correctOption = request.json["correctOption"]
+    marks = request.json["marks"]
+
+    response = ac.aptitudeSaveQuestions(testId,orgName,question,options,correctOption,marks);
+    return response;
+
+
+@app.route('/aptitude/getQuestions', methods = ['POST'])
+@exponential_backoff()
+def aptitudeGetQuestions():
+
+    testId = request.json["testId"]
+    orgName = request.json["orgName"]
+
+    response = ac.aptitudeGetQuestions(testId,orgName);
+    return response;
+
+
+@app.route('/aptitude/submitTestFromUserSide', methods = ['POST'])
+@exponential_backoff()
+def aptitudeSubmitTestFromUserSide():
+
+    testId = request.json["testId"]
+    email = request.json["email"]
+    totalMarks = request.json["totalMarks"]
+
+    response = ac.aptitudeSubmitTestFromUserSide(testId,email,totalMarks);
+    return response;
 
 
 if __name__ == "__main__":

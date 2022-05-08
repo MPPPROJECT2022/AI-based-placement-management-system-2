@@ -731,3 +731,54 @@ def getTestWithCodes(collegeCode,testCode):
     return jsonify(data)
 
 
+def aptitudeSaveQuestions(testId,orgName,question,options,correctOption,marks):
+    records = db.aptitudeQuestions
+    # print(records.count_documents({}))
+    newTestRecord = {
+        "testId":testId,
+        "orgName": orgName,
+        "question": question,
+        "question": question,
+        "options":options,
+        "correctOption":correctOption,
+        "marks":marks
+    }
+
+    records.insert_one(newTestRecord)
+    return "Aptitude questions saved"
+
+
+def aptitudeGetQuestions(testId,orgName):
+    records = db.aptitudeQuestions
+    # list = []
+    cursor1 = records.find({'testId':testId})
+
+    data = []
+    for doc in cursor1:
+        doc['_id'] = str(doc['_id'])  # This does the trick!
+        data.append(doc)
+    return jsonify(data)
+
+def aptitudeSubmitTestFromUserSide(testId,email,totalMarks):
+    records = db.aptitudeResult
+    # print(records.count_documents({}))
+    newTestRecord = {
+        "testId":testId,
+        "email": email,
+        "totalMarks": totalMarks
+    }
+
+    records.insert_one(newTestRecord)
+    return "Aptitude Result saved saved"
+
+def getAptitudeResultWithEmail(email):
+    records = db.aptitudeResult
+    # list = []
+    cursor1 = records.find({'email':email})
+
+    data = []
+    for doc in cursor1:
+        doc['_id'] = str(doc['_id'])  # This does the trick!
+        data.append(doc)
+    return jsonify(data)
+
