@@ -1,3 +1,7 @@
+const noteRoutes = require("./routes/noteRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
+const { errorHandler, notFound } = require("./middleware/errorMiddleware.js");
+
 const express = require("express");
 var bodyParser = require("body-parser");
 const Axios = require("axios");
@@ -11,9 +15,8 @@ const app =  express();
 
 
 //Apti____________
-const user = require("./routes/user");
-const teacher = require("./routes/teacher");
-const student = require("./routes/student");
+// const connectDB = require("./config/db.js";
+const colors = require("colors");
 const cookieParser = require("cookie-parser");
 var path = require("path");
 require('dotenv').config()
@@ -35,16 +38,13 @@ app.use(session({
   cookie: { secure: true }
 }))
 
+app.use("/api/notes", noteRoutes);
+app.use("/api/users", userRoutes);
 
-app.use("/user", user);
-app.use("/teacher", teacher);
-app.use("/student", student);
-//Apti End______________
+app.use(notFound);
+app.use(errorHandler);
 
-
-
-
-
+//Apti____________End__________________
 
 
 
@@ -68,7 +68,7 @@ const port = 3000;
 //compiler code here_______________________Start________________-________
 app.use(express.json());
 app.post("/compile", (req, res) => {
-	//getting the required data from the request
+	//getting the required data require(the request
 	let code = req.body.code;
 	let language = req.body.language;
 	let input = req.body.input;

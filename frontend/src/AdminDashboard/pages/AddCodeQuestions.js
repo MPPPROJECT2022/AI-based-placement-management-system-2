@@ -9,7 +9,6 @@ function AddCodeQuestions() {
     const [message, setMessage] = useState("");
     
   
-  
     const onChangeQuestion = (e) => {
       setproblemStatement({ problemStatement: e.target.value });
     };
@@ -30,9 +29,7 @@ function AddCodeQuestions() {
         problemStatement: problemStatement,
         testInput: testInput,
         expectedOutput: expectedOutput,
-        instructions: instructions,
-        userEmail: 'userEmail',
-        testUUID: uuid()
+        instructions: instructions     
       };
       console.log(data);
       fetch('http://localhost:5000/coding/storeTestCases', {
@@ -54,8 +51,6 @@ function AddCodeQuestions() {
   
     return (
       <>
-      
-    
       <div className= "container">
       <form className="form-control" onSubmit={onSubmit}>
           <div className="form-group">
