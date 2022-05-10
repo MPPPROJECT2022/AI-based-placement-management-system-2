@@ -2,63 +2,34 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Loading from "../../components/Loading";
-import ErrorMessage from "../../components/ErrorMessage";
-import { register } from "../../actions/userActions";
-import MainScreen from "../../components/MainScreen";
-// import "./RegisterScreen.css";
+import Loading from "../../AptiComponents/components/Loading";
+import ErrorMessage from "../../AptiComponents/components/ErrorMessage";
+import { register } from "../../AptiComponents/actions/userActions";
+import MainScreen from "../../AptiComponents/components/MainScreen";
+
+
+import "./RegisterScreen.css";
 
 function RegisterScreen({ history }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [orgname, setorgName] = useState("");
   const [address, setAddress] = useState("");
-  const [pic, setPic] = useState(
-    "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-  );
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
-  const [picMessage, setPicMessage] = useState(null);
 
 
   const dispatch = useDispatch();
 
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
+  
 
-  const postDetails = (pics) => {
-    if (
-      pics ===
-      "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-    ) {
-      return setPicMessage("Please Select an Image");
-    }
-    setPicMessage(null);
-    if (pics.type === "image/jpeg" || pics.type === "image/png") {
-      const data = new FormData();
-      data.append("file", pics);
-      data.append("upload_preset", "notezipper");
-      data.append("cloud_name", "piyushproj");
-      fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
-        method: "post",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setPic(data.url.toString());
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      return setPicMessage("Please Select an Image");
-    }
-  };
 
   useEffect(() => {
     if (userInfo) {
-      history.push("/aptitude");
+      history.push("/");
     }
   }, [history, userInfo]);
 
@@ -68,7 +39,7 @@ function RegisterScreen({ history }) {
 
     if (password !== confirmpassword) {
       setMessage("Passwords do not match");
-    } else dispatch(register(name, email, password, pic));
+    } else dispatch(register(name, email, password, orgname));
   };
 
   return (
@@ -139,21 +110,6 @@ function RegisterScreen({ history }) {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </Form.Group>
-
-
-          {/* {picMessage && (
-            <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
-          )} */}
-          {/* <Form.Group controlId="pic">
-            <Form.Label>Profile Picture</Form.Label>
-            <Form.File
-              onChange={(e) => postDetails(e.target.files[0])}
-              id="custom-file"
-              type="image/png"
-              label="Upload Profile Picture"
-              custom
-            />
-          </Form.Group> */}
 
           <Button variant="primary" type="submit">
             Register

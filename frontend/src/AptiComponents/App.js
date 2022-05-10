@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -31,7 +31,7 @@ function App() {
         <Route path="/createnote" component={CreateNote} />;
         <Route path="/profile" component={ProfileScreen} />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }

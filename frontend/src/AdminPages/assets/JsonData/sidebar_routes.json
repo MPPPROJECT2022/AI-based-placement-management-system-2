@@ -6,22 +6,22 @@
     },
     {
         "display_name": "Aptitude",
-        "route": "/aptitude",
+        "route": "/adminaptitude",
         "icon": "bx bx-chart"
     },
     {
         "display_name": "Code Challange",
-        "route": "/codechallange",
+        "route": "/admincodechallange",
         "icon": "bx bx-package"
     },
     {
         "display_name": "Technical",
-        "route": "/technical",
+        "route": "/admintechnical",
         "icon": "bx bx-terminal"
     },
     {
         "display_name": "Group Descussion",
-        "route": "/gd",
+        "route": "/admingd",
         "icon": "bx bx-group"
     },
     {
