@@ -2,8 +2,32 @@ import "./aptistyles.css";
 import React, { useState } from "react";
 
 
-function AptitudePage() {
+function AptitudePage({history}) {
+  const orgName1 = "Tech Phantoms"
+  const testID = "tech2022"
   //question data_______________________Start______________________
+  // /aptitude/getQuestions
+  if(!localStorage.userInfo){
+    history.push("/");
+  }
+  const LoginInfo = JSON.parse(localStorage.userInfo)
+  // console.log(LoginInfo.orgname)
+  const data1 = {
+     orgName : orgName1,
+     testId: testID
+  }
+
+  fetch('http://localhost:5000/aptitude/getQuestions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ orgName: "Tech Phantoms", testId: "tech2022"})
+  })
+    .then((response) => {
+      return response.json();
+    }) .then((myJson) => {
+      console.log(myJson)
+    });
+
 
   const data = [
     {
