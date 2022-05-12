@@ -236,11 +236,11 @@ def getTestWithCodes():
 def aptitudeSaveQuestions():
 
     testId = request.json["testId"]["testId"]
-    orgName = request.json["orgName"]
-    question = request.json["question"]
-    options = request.json["options"]
-    correctOption = request.json["correctOption"]
-    marks = request.json["marks"]
+    orgName = request.json["orgName"]["orgName"]
+    question = request.json["question"]["question"]
+    options = request.json["options"]["options"]
+    correctOption = request.json["correctOption"]["correctOption"]
+    marks = request.json["marks"]["marks"]
 
     response = ac.aptitudeSaveQuestions(testId,orgName,question,options,correctOption,marks);
     return response;
@@ -251,7 +251,7 @@ def aptitudeSaveQuestions():
 def aptitudeGetQuestions():
 
     testId = request.json["testId"]["testId"]
-    orgName = request.json["orgName"]
+    orgName = request.json["orgName"]["orgName"]
 
     response = ac.aptitudeGetQuestions(testId,orgName);
     return response;
