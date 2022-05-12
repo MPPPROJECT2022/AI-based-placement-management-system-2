@@ -235,7 +235,7 @@ def getTestWithCodes():
 @exponential_backoff()
 def aptitudeSaveQuestions():
 
-    testId = request.json["testId"]
+    testId = request.json["testId"]["testId"]
     orgName = request.json["orgName"]
     question = request.json["question"]
     options = request.json["options"]
@@ -250,7 +250,7 @@ def aptitudeSaveQuestions():
 @exponential_backoff()
 def aptitudeGetQuestions():
 
-    testId = request.json["testId"]
+    testId = request.json["testId"]["testId"]
     orgName = request.json["orgName"]
 
     response = ac.aptitudeGetQuestions(testId,orgName);
