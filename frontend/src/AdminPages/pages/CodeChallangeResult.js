@@ -5,7 +5,7 @@ function CodeChallangeResult() {
   const history = useHistory();
   
   const handleRoute = () =>{ 
-    history.push("/addCodeQuestions");
+    history.push("/adminaddCodeQuestions");
   }
   var myNewArray = [];
 
