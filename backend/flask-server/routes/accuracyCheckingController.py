@@ -695,14 +695,15 @@ def getTestCases():
     return jsonify(data)
 
 
-def createTest(userEmail,testName,collegeCode,testCode):
+def createTest(userEmail,testName,collegeCode,testCode,orgName):
     records = db.tests
     # print(records.count_documents({}))
     newTestRecord = {
         "userEmail":userEmail,
         "testName": testName,
         "collegeCode": collegeCode,
-        "testCode": testCode
+        "testCode": testCode,
+        "orgName": orgName
     }
 
     records.insert_one(newTestRecord)
@@ -744,6 +745,8 @@ def aptitudeSaveQuestions(testId,orgName,question,options,correctOption,marks):
         "marks":marks
     }
 
+
+
     records.insert_one(newTestRecord)
     return "Aptitude questions saved"
 
@@ -781,4 +784,22 @@ def getAptitudeResultWithEmail(email):
         doc['_id'] = str(doc['_id'])  # This does the trick!
         data.append(doc)
     return jsonify(data)
+
+def getOrgNames():
+    records = db.tests
+    # list = []
+    cursor1 = records.find({})
+    data = []
+    for doc in cursor1:
+        doc['_id'] = str(doc['_id'])  # This does the trick!
+        data.append(doc)
+    obj = {}
+    for i in range(len(data)):
+        if hasattr(obj,data[i]['orgName']):
+            print("has")
+        else:
+            obj[data[i]['orgName']] = True
+    return obj
+
+
 

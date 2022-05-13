@@ -38,13 +38,20 @@
 #   print("Not found!!!")
 
 
-try:
-  from googlesearch import search
-except ImportError:
-  print("No module named 'google' found")
+# try:
+#   from googlesearch import search
+# except ImportError:
+#   print("No module named 'google' found")
  
-# to search
-query = "Geeksforgeeks"
+# # to search
+# query = "Geeksforgeeks"
  
-for j in search(query, tld="co.in", num=10, stop=10, pause=2):
-  print(j)
+# for j in search(query, tld="co.in", num=10, stop=10, pause=2):
+#   print(j)
+obj = {}
+obj['name']=True
+if str(hasattr(obj,'name')):
+  print("pka")
+else:
+  print("no")
+

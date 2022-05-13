@@ -198,10 +198,11 @@ def createTest():
     testName = request.json["testName"]
     collegeCode = request.json["collegeCode"]
     testCode = request.json["collegeCode"]
+    orgName = request.json["orgName"]
     # uuid.uuid4()
     # str(uuid.uuid4())
     # testCode = uuid.uuid4().hex
-    response = ac.createTest(userEmail,testName,collegeCode,testCode);
+    response = ac.createTest(userEmail,testName,collegeCode,testCode,orgName);
     return response;
 
 @app.route('/testCreation/getTestWithEmail', methods = ['POST'])
@@ -266,6 +267,14 @@ def aptitudeSubmitTestFromUserSide():
     totalMarks = request.json["totalMarks"]
 
     response = ac.aptitudeSubmitTestFromUserSide(testId,email,totalMarks);
+    return response;
+
+@app.route('/aptitude/getOrgNames', methods = ['POST'])
+@exponential_backoff()
+def getOrgNames():
+
+
+    response = ac.getOrgNames();
     return response;
 
 
