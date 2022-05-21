@@ -19,6 +19,7 @@ import MyNotes from "../AptiComponents/screens/MyNotes/MyNotes"
 import SingleNote from "../AptiComponents/screens/SingleNote/SingleNote"
 import CreateNote from "../AptiComponents/screens/SingleNote/CreateNote"
 import ProfileScreen from "../AptiComponents/screens/ProfileScreen/ProfileScreen"
+import ResumeParsing from "../ResumePrasing/ResumeParsing"
 
 // import Dashboard from '../AdminPages/pages/Dashboard'
 // import AdminAptitude from '../AdminPages/pages/AptiResult'
@@ -47,6 +48,7 @@ return (
     	<Route path='/home' component={App2} />
 		<Route path='/Result' component={Result} />
 		<Route path='/CodeAdmin' component={CodeAdmin} />
+		<Route path='/uploadresume' component = {ResumeParsing} />
 
 		
 
