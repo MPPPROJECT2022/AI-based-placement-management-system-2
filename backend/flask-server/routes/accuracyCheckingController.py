@@ -368,13 +368,15 @@ def getSentencesToSpeak(topic, testUUID):
         sentenceToSendArray = []
         for i in range(3):
             sentenceToSendArray.append(data[0]['sentences'][i])
-
         for j in range(3):
-            list(data)[0]['sentences'].pop(i)
+            if(list(data)[0]['sentences']):
+                list(data)[0]['sentences'].pop(0)
 
         obj = {}
         obj['testUUID'] = testUUID
         obj['data'] = list(data)[0]['sentences']
+        tempDB.delete_one({"testUUID": testUUID})
+
         tempDB.insert_one(obj)
         return jsonify(sentenceToSendArray)
     else:
@@ -382,14 +384,17 @@ def getSentencesToSpeak(topic, testUUID):
         data = []
         sentenceToSendArray = []
         for i in range(3):
-            sentenceToSendArray.append(returnedSentences[0]['data'][i])
+            if(len(returnedSentences[0]['data'])>(i)):
+                sentenceToSendArray.append(returnedSentences[0]['data'][i])
         for i in range(3):
-            returnedSentences[0]['data'].pop(i)
+            if(list(returnedSentences)[0]['data']):
+                returnedSentences[0]['data'].pop(0)
         obj = {}
         obj['testUUID'] = testUUID
         obj['data'] = list(returnedSentences)[0]['data']
         tempDB.delete_one({"testUUID": testUUID})
-        tempDB.insert_one(obj)
+        if(len(obj['data'])):
+            tempDB.insert_one(obj)# continue from here
 
         return jsonify(sentenceToSendArray)
 

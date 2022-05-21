@@ -44,14 +44,15 @@ function RegisterScreen({ history }) {
 
   return (
    <>
-     <MainScreen title="REGISTER">
-          <div className="loginContainer">
+   <div className= "contentx">
+      <h1>Register</h1>
+           <div className = "maincontainer">
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
         {loading && <Loading />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
+            
             <Form.Control
               type="name"
               value={name}
@@ -62,7 +63,7 @@ function RegisterScreen({ history }) {
 
 
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            
             <Form.Control
               type="email"
               value={email}
@@ -72,7 +73,7 @@ function RegisterScreen({ history }) {
           </Form.Group>
 
           <Form.Group controlId="orgname">
-            <Form.Label>Organization / School Name</Form.Label>
+            
             <Form.Control
               type="orgname"
               value={orgname}
@@ -82,7 +83,7 @@ function RegisterScreen({ history }) {
           </Form.Group>
 
           <Form.Group controlId="address">
-            <Form.Label>Organization / School Address</Form.Label>
+           
             <Form.Control
               type="address"
               value={address}
@@ -92,7 +93,7 @@ function RegisterScreen({ history }) {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+          
             <Form.Control
               type="password"
               value={password}
@@ -102,7 +103,7 @@ function RegisterScreen({ history }) {
           </Form.Group>
 
           <Form.Group controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
+           
             <Form.Control
               type="password"
               value={confirmpassword}
@@ -121,7 +122,7 @@ function RegisterScreen({ history }) {
           </Col>
         </Row>
           </div>
-    </MainScreen>
+    </div>
     </>
   )
 }

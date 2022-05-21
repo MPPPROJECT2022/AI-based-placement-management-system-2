@@ -57,7 +57,7 @@ def generateReportOfAParticularTest():
 @exponential_backoff()
 def generateSentencesFromAParagraph():
 	obj = {};
-	response = ac.split_into_sentences(request.json["topic"],request.json["paragraph"][0]);
+	response = ac.split_into_sentences(request.json["topic"],request.json["paragraph"]);
 	obj['splitSentences']=response;
 	return obj;
 
@@ -236,7 +236,7 @@ def getTestWithCodes():
 def aptitudeSaveQuestions():
 
     testId = request.json["testId"]["testId"]
-    orgName = request.json["orgName"]["orgName"]
+    orgName = request.json["orgName"]
     question = request.json["question"]["question"]
     options = request.json["options"]["options"]
     correctOption = request.json["correctOption"]["correctOption"]
@@ -250,8 +250,8 @@ def aptitudeSaveQuestions():
 @exponential_backoff()
 def aptitudeGetQuestions():
 
-    testId = request.json["testId"]["testId"]
-    orgName = request.json["orgName"]["orgName"]
+    testId = request.json["testId"]
+    orgName = request.json["orgName"]
 
     response = ac.aptitudeGetQuestions(testId,orgName);
     return response;

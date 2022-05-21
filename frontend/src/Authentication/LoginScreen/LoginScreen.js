@@ -40,14 +40,15 @@ function LoginScreen({history}) {
 
   return (
     <>
-    <MainScreen title="LOGIN">
-             <div className="loginContainer">
+    <div className= "contentx">
+      <h1>Login</h1>
+           <div className = "maincontainer">
          {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
          {loading && <Loading />}
          <Form onSubmit={submitHandler}>
            <Form.Group controlId="formBasicEmail">
              <Form.Label>Email address</Form.Label>
-            <Form.Control
+            <Form.Control className = "inputbox"
               type="email"
               value={email}
               placeholder="Enter email"
@@ -57,7 +58,7 @@ function LoginScreen({history}) {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control
+            <Form.Control className = "inputbox" 
               type="password"
               value={password}
               placeholder="Password"
@@ -75,7 +76,7 @@ function LoginScreen({history}) {
           </Col>
         </Row>
       </div>
-      </MainScreen>
+      </div>
     </>
   )
 }

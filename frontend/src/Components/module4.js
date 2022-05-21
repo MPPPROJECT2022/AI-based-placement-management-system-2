@@ -86,9 +86,9 @@ const getVideo = () => {
 
   }
   useEffect(() => {
-   getVideo()
-	 Interval1()  
-	Interval2()
+  //  getVideo()
+	//  Interval1()  
+	// Interval2()
   }, [videoRef]);
 
 const Interval1 = () =>{
